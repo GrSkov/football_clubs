@@ -39,7 +39,7 @@ class Articles(models.Model):
     content = models.TextField(verbose_name='Стаття')
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Час створення')
     time_update = models.DateTimeField(auto_now=True, verbose_name='Час редагування')
-    club = models.ForeignKey('Clubs', on_delete=models.CASCADE, verbose_name='Команда')
+    club = models.ForeignKey('Clubs', on_delete=models.CASCADE, null=True, verbose_name='Команда')
     author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True, verbose_name='Автор')
 
     def __str__(self):
