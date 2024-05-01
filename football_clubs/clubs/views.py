@@ -1,3 +1,10 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def index(request):
+    context = {
+        'title': 'ГОЛОВНА',
+        'content': "Європейські клуби",
+    }
+
+    return render(request, 'clubs/index.html', context)

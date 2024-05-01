@@ -75,8 +75,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'football_clubs',
-        'USER': 'admin',
-        'PASSWORD': '1111',
+        'USER': 'postgres',
+        'PASSWORD': '220688',
         'HOST': 'localhost',
         'PORT': '',
     }
