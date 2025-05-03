@@ -1,0 +1,65 @@
+{% load static %}
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"/>
+    <title>{{ title }}</title>
+</head>
+<body>
+<!-- Header -->
+
+<div id="header">
+    <div class="shell">
+        <!-- Logo -->
+        <h1 id="logo" class="notext"><a href="#">Sport Zone Sport Portal</a></h1>
+        <!-- End Logo -->
+    </div>
+</div>
+<!-- End Header -->
+
+<!-- Navigation -->
+<div id="navigation">
+    <div class="shell">
+        <div class="cl">&nbsp;</div>
+        <ul>
+            <li><a href="{% url 'main' %}">На головну</a></li>
+            <li><a href="{% url 'add_article' %}">Додати статтю</a></li>
+            <li><a href="#">Фотогалерея</a></li>
+            <li><a href="#">Про сайт</a></li>
+            <li><a href="#">Реєстрація/Авторизація</a></li>
+        </ul>
+        <div class="cl">&nbsp;</div>
+    </div>
+</div>
+<!-- End Navigation -->
+
+{% block content %}
+
+{% endblock %}
+
+<!-- Footer -->
+<div id="footer">
+    <div class="shell">
+        <div class="cl">&nbsp;</div>
+        <div class="container">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" style="height:75px; width:560px">
+                <tbody>
+                <tr>
+                    <!--                    <td style="height:75px; text-align:center; vertical-align:middle; width:560px">-->
+                    <!--                        <p><a href="http://partners-pro.ru" target="_blank"><img-->
+                    <!--                                alt="Изготовление партнёрских интернет-магазинов и бесплатных сайтов"-->
+                    <!--                                src="" style="height:75px; width:560px"/></a>-->
+                    <!--                        </p>-->
+                    <!--                    </td>-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="cl">&nbsp;</div>
+    </div>
+</div>
+<!-- End Footer -->
+</body>
+</html>

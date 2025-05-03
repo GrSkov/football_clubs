@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{{ add_article }}</h1>
+<form action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p>
+        <button type="submit">Додати</button>
+</form>
+
+{% endblock %}

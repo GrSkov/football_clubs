@@ -19,6 +19,10 @@ class Clubs(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Команди'
+        verbose_name_plural = 'Команди'
+
 
 class Countries(models.Model):
     name = models.CharField(max_length=30, unique=True, verbose_name='Назва країни')
@@ -33,14 +37,23 @@ class Countries(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Країни'
+        verbose_name_plural = 'Країни'
+
 
 class Articles(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, verbose_name='Назва статті')
     content = models.TextField(verbose_name='Стаття')
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Час створення')
     time_update = models.DateTimeField(auto_now=True, verbose_name='Час редагування')
     club = models.ForeignKey('Clubs', on_delete=models.CASCADE, null=True, verbose_name='Команда')
+    country = models.ForeignKey('Countries', on_delete=models.CASCADE, null=True, verbose_name='Країна')
     author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True, verbose_name='Автор')
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = 'Статті'
+        verbose_name_plural = 'Статті'

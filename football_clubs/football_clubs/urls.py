@@ -17,7 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from clubs.views import page_not_found
+from debug_toolbar.toolbar import debug_toolbar_urls
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('clubs.urls')),
-]
+                  path('admin/', admin.site.urls),
+                  path('', include('clubs.urls')),
+                  path('users/', include('users.urls', namespace='users')),
+              ] + debug_toolbar_urls()
+
+handler404 = page_not_found
+
+admin.site.site_header = 'Керування сайтом'
+admin.site.index_title = 'Європейські команди'
