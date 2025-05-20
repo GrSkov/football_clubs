@@ -9,8 +9,8 @@ class AddArticleForm(forms.ModelForm):
 
     class Meta:
         model = Articles
-        fields = ['title', 'content', 'club', 'country']
+        fields = ['title', 'content', 'photo', 'club', 'country']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-input'}),
-            'content': forms.Textarea(attrs={'cols': 50, 'rows': 5}),
+            'content': forms.Textarea(attrs={'cols': 90, 'rows': 11}),
         }

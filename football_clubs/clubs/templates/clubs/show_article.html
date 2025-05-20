@@ -9,13 +9,13 @@
 
         <!-- Main Slide Item -->
         <div class="featured-main">
-            <h1>{{ add_article }}</h1>
-            <form action="">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <p>
-                    <button type="submit">Додати</button>
-            </form>
+            <h1>{{ article.title }}</h1>
+
+            {% if article.photo %}
+            <p><img class="img-article-left" src="{{ article.photo.url }}" width="100%"></p>
+            {% endif %}
+
+            {{ article.content|linebreaks }}
         </div>
         <!-- End Main Slide Item -->
 
@@ -90,38 +90,9 @@
                     <a href="#" class="button">Read more</a>
                 </p>
             </div>
-            <div class="cl">&nbsp;</div>
-            <div class="video-box">
-                <div class="cl">&nbsp;</div>
-                <h2 class="left">video spot</h2>
-                <a href="#" class="button">All videos</a>
-                <div class="cl">&nbsp;</div>
-                <div class="video-item-box">
-                    <a href="#" class="left"><img src="{% static 'images/video-1.jpg' %}" alt=""/></a>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                    <a href="#" class="watch-now">Watch now</a>
-                </div>
-                <div class="video-item-box second">
-                    <a href="#" class="left"><img src="{% static 'images/video-2.jpg' %}" alt=""/></a>
-                    <p>Curabitur consectetur tellus a diam tincidunt pellentesque</p>
-                    <a href="#" class="watch-now">Watch now</a>
-                </div>
-                <div class="video-item-box">
-                    <a href="#" class="left"><img src="{% static 'images/video-3.jpg' %}" alt=""/></a>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                    <a href="#" class="watch-now">Watch now</a>
-                </div>
-                <div class="video-item-box second">
-                    <a href="#" class="left"><img src="{% static 'images/video-4.jpg' %}" alt=""/></a>
-                    <p>Aliquam erat volutpat. Nam tortor justo, pretium eget iaculis et</p>
-                    <a href="#" class="watch-now">Watch now</a>
-                </div>
-                <div class="cl">&nbsp;</div>
-            </div>
         </div>
         <div class="cl">&nbsp;</div>
     </div>
 </div>
 <!-- End Main -->
-
 {% endblock %}

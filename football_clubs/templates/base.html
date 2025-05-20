@@ -28,13 +28,45 @@
             <li><a href="{% url 'add_article' %}">Додати статтю</a></li>
             <li><a href="#">Фотогалерея</a></li>
             <li><a href="#">Про сайт</a></li>
-            <li><a href="#">Реєстрація/Авторизація</a></li>
+            {% csrf_token %}
+            {% if user.is_authenticated %}
+            <li class="last"><a>{{user.username}} </a> <a href="{% url 'users:logout' %}">Вийти</a></li>
+            {% else %}
+            <li class="last"><a href="{% url 'users:login' %}">Авторизація</a> | <a href="#">Реєстрація</a></li>
+            {% endif %}
         </ul>
         <div class="cl">&nbsp;</div>
     </div>
 </div>
 <!-- End Navigation -->
 
+<!--<h1>{{ content }}</h1>-->
+<!-- Heading -->
+<div id="heading">
+    <div class="shell">
+        <div id="heading-cnt">
+
+            <!-- Sub nav -->
+            <div id="side-nav">
+                <ul>
+                    <li class="active">
+                        <div class="link"><a href="{% url 'main' %}">Головна</a></div>
+                    </li>
+                    <li>
+                        <div class="link"><a href="{% url 'article' %}">Всі статті</a></div>
+                    </li>
+                    <li>
+                        <div class="link"><a href="#">Країни</a></div>
+                    </li>
+                    <li>
+                        <div class="link"><a href="#">Європейські клуби</a></div>
+                    </li>
+                    <li>
+                        <div class="link"><a href="#">Фотогалерея</a></div>
+                    </li>
+                </ul>
+            </div>
+            <!-- End Sub nav -->
 {% block content %}
 
 {% endblock %}
@@ -47,12 +79,12 @@
             <table align="center" border="0" cellpadding="0" cellspacing="0" style="height:75px; width:560px">
                 <tbody>
                 <tr>
-                    <!--                    <td style="height:75px; text-align:center; vertical-align:middle; width:560px">-->
-                    <!--                        <p><a href="http://partners-pro.ru" target="_blank"><img-->
-                    <!--                                alt="Изготовление партнёрских интернет-магазинов и бесплатных сайтов"-->
-                    <!--                                src="" style="height:75px; width:560px"/></a>-->
-                    <!--                        </p>-->
-                    <!--                    </td>-->
+                    <td style="height:75px; text-align:center; vertical-align:middle; width:560px">
+                        <p><a href="http://partners-pro.ru" target="_blank"><img
+                                alt="Изготовление партнёрских интернет-магазинов и бесплатных сайтов"
+                                src="" style="height:75px; width:560px"/></a>
+                        </p>
+                    </td>
                 </tr>
                 </tbody>
             </table>
