@@ -9,7 +9,7 @@
 
         <!-- Main Slide Item -->
         <div class="featured-main">
-            <h1>Авторизація</h1>
+            <h1>Реєстрація</h1>
             <form method="post">
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ next }}"/>
@@ -19,9 +19,8 @@
                 <div class="form-error">{{ f.errors }}</div>
                 {% endfor %}
                 <p>
-                    <button type="submit">Увійти</button>
+                    <button type="submit">Реєстрація</button>
                 </p>
-                <p><a href="{% url 'users:password_reset' %}">Забули пароль?</a></p>
             </form>
         </div>
         <!-- End Main Slide Item -->

@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm
 from django.contrib.auth.models import User
 
 from users.models import Users
@@ -13,3 +13,59 @@ class UserForm(AuthenticationForm):
     class Meta:
         model = get_user_model()
         fields = ['username', 'password']
+
+
+class RegisterUserForm(UserCreationForm):
+    username = forms.CharField(label='Логін', widget=forms.TextInput(attrs={'class': 'form-input'}))
+    password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
+    password2 = forms.CharField(label='Підтвердіть пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
+
+    class Meta:
+        model = get_user_model()
+        fields = ['username', 'email', 'first_name', 'last_name', 'password1', 'password2']
+        labels = {
+            'email': 'E-mail',
+            'first_name': "Ім'я",
+            'last_name': 'Прізвище',
+        }
+        widgets = {
+            'email': forms.TextInput(attrs={'class': 'form-input'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-input'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-input'}),
+        }
+
+    # def clean_password2(self):
+    #     cl_data = self.cleaned_data
+    #     if cl_data['password1'] != cl_data['password2']:
+    #         raise forms.ValidationError("Паролі відрізняються!")
+    #     return cl_data['password']
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if get_user_model().objects.filter(email=email).exists():
+            raise forms.ValidationError("Така пошта вже існує!")
+        return email
+
+
+class ProfileUserForm(forms.ModelForm):
+    username = forms.CharField(label='Логін', widget=forms.TextInput(attrs={'class': 'form-input'}))
+    email = forms.CharField(label='E-mail', widget=forms.TextInput(attrs={'class': 'form-input'}))
+
+    class Meta:
+        model = get_user_model()
+        fields = ['username', 'email', 'first_name', 'last_name']
+        labels = {
+            'first_name': "Ім'я",
+            'last_name': "Прізвище",
+        }
+        widgets = {
+            'first_name': forms.TextInput(attrs={'class': 'form-input'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-input'}),
+        }
+
+
+class UserPasswordChangeForm(PasswordChangeForm):
+    old_password = forms.CharField(label='Старий пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
+    new_password1 = forms.CharField(label='Новий пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
+    new_password2 = forms.CharField(label='Підтвердження паролю',
+                                    widget=forms.PasswordInput(attrs={'class': 'form-input'}))

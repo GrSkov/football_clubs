@@ -30,9 +30,11 @@
             <li><a href="#">Про сайт</a></li>
             {% csrf_token %}
             {% if user.is_authenticated %}
-            <li class="last"><a>{{user.username}} </a> <a href="{% url 'users:logout' %}">Вийти</a></li>
+            <li class="last"><a href="{% url 'users:profile' %}">{{ user.username }}</a> <a
+                    href="{% url 'users:logout' %}">Вийти</a></li>
             {% else %}
-            <li class="last"><a href="{% url 'users:login' %}">Авторизація</a> | <a href="#">Реєстрація</a></li>
+            <li class="last"><a href="{% url 'users:login' %}">Авторизація</a> | <a href="{% url 'users:register' %}">Реєстрація</a>
+            </li>
             {% endif %}
         </ul>
         <div class="cl">&nbsp;</div>

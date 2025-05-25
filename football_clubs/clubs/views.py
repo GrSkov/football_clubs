@@ -2,8 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseNotFound
 from django.shortcuts import render, redirect, get_object_or_404
 
-from clubs.forms import AddArticleForm
-from clubs.models import Articles
+from clubs.forms import AddArticleForm, EditClubsForm
+from clubs.models import Articles, Clubs
 
 
 def index(request):
@@ -27,16 +27,36 @@ def article(request):
 @login_required
 def add_article(request):
     if request.method == 'POST':
-        form = AddArticleForm(request.POST)
+        form = AddArticleForm(request.POST, request.FILES)
+        club_form = EditClubsForm(request.POST, request.FILES)
+
         if form.is_valid():
-            form.save()
+            club = form.cleaned_data['club']
+            if not club and club_form.is_valid():
+                club = club_form.save()
+            elif not club and not club_form.is_valid():
+                context = {
+                    'form': form,
+                    'club_form': club_form,
+                    'error': 'Виберіть існуючий клуб фбо створіть новий.',
+                }
+                return render(request, 'clubs/add_article.html', context)
+            article = form.save(commit=False)
+            article.club = club
+            article.author = request.user
+            if not article.slug:
+                article.slug = None
+            article.save()
             return redirect('main')
     else:
         form = AddArticleForm()
+        club_form = EditClubsForm()
 
-    context = {'add_article': 'Додати статтю',
-               'form': form,
-               }
+    context = {
+        'add_article': 'Додати статтю',
+        'form': form,
+        'club_form': club_form,
+    }
     return render(request, 'clubs/add_article.html', context)
 
 
